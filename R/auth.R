@@ -88,7 +88,16 @@ kaggle_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
     ## set as store as env variable
     set_renv(KAGGLE_PAT = paste0(username, "/", key))
 
-    message("Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT` environment variable for future sessions.")
+  } else {
+    ## validate username and key inputs
+    stopifnot(length(username) == 1, is.atomic(username),
+      length(key) == 1, is.character(key))
+
+    ## set as store as env variable
+    set_renv(KAGGLE_PAT = paste0(username, "/", key))
+
+    message("Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT`\n",
+      "  environment variable for future sessions.")
   }
 
   ## return basic http authorization method (with kaggle-generated key as password)
