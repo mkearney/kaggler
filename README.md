@@ -32,12 +32,13 @@ devtools::install_packages("mkearney/kaggle")
       - Save/move the `kaggle.json` file to your current working
         directory
       - Enter your `username` and `key` and use the `kaggle_auth()`
-        function like in the example below
+        function like in the example
+below
 
 <!-- end list -->
 
 ``` r
-kaggle_auth
+kaggle_auth(username = "mkearney", key = "9as87f6faf9a8sfd76a9fsd89asdf6dsa9f8")
 #> Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT` environment variable for future sessions.
 ```
 
