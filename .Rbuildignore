@@ -1,0 +1,7 @@
+^logo\.R$
+^make\.R$
+^\.DS_Store$
+^LICENSE\.md$
+^README\.Rmd$
+^kaggle\.Rproj$
+^\.Rproj\.user$
