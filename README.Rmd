@@ -23,7 +23,7 @@ options(tibble.print_max = 5)
 
 ## Installation
 
-You can install the dev version of kaggler from [CRAN](https://github.com/mkearney/kaggler) with:
+You can install the dev version of **{kaggler}** from [CRAN](https://github.com/mkearney/kaggler) with:
 
 ```{r, eval = FALSE}
 ## install kaggler package from github

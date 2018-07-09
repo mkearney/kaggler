@@ -7,7 +7,7 @@
 
 ## Installation
 
-You can install the dev version of kaggler from
+You can install the dev version of **{kaggler}** from
 [CRAN](https://github.com/mkearney/kaggler) with:
 
 ``` r
