@@ -10,7 +10,7 @@
 #' @param x Output from kaggle function
 #' @return Print out of summary info and a tibble of the data.
 #' @export
-kaggle_as_tbl <- function(x) {
+kgl_as_tbl <- function(x) {
   if (inherits(x, "response")) {
     x <- tryCatch(as_json(x), error = function(e) as_parsed(x))
   }
@@ -40,7 +40,7 @@ as_json <- function(r) jsonlite::fromJSON(httr::content(r,
 
 readlines <- function(x, ...) {
   con <- file(x)
-  x <- readLines(con, warn = FALSE, ...)
+  x <- readLines(con, warn = FALSE, encoding = "UTF-8", ...)
   close(con)
   x
 }
@@ -91,7 +91,7 @@ check_renv <- function(var = NULL) {
 
 is_incomplete <- function(x) {
   con <- file(x)
-  x <- tryCatch(readLines(con), warning = function(w) return(TRUE))
+  x <- tryCatch(readLines(con, encoding = "UTF-8"), warning = function(w) return(TRUE))
   close(con)
   ifelse(isTRUE(x), TRUE, FALSE)
 }

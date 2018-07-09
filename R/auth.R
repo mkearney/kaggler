@@ -34,7 +34,7 @@
 #' create and save for you manually the first time you enter your username/key
 #' or path to your \code{kaggle.json} file.
 #' @export
-kaggle_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
+kgl_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
 
   ## if all null, look for environment variables
   if (is.null(username) && is.null(key) && is.null(creds_file)) {
@@ -65,7 +65,7 @@ kaggle_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
     ## read and parse kaggle.json creds file if it exists
     if (file.exists(creds_file)) {
       con <- file(creds_file)
-      creds_file <- readLines(con, warn = FALSE)
+      creds_file <- readLines(con, warn = FALSE, encoding = "UTF-8")
       close(con)
 
     ## if file doens't exist and if contents are NOT supplied as a string then STOP

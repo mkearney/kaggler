@@ -1,16 +1,16 @@
-Package: kaggle
+Package: kaggler
 Version: 0.0.0.9000
 Title: Kaggle API Client
-Description: An interface for interacting with the public API offerred by 
-    \href{https://www.kaggle.com}{Kaggle}, a machine learning competition 
-    platform. 
+Description: An interface for interacting with the public API offered by
+    \href{https://www.kaggle.com}{Kaggle}, a machine learning competition
+    platform.
 Authors@R: person("Michael Wayne", "Kearney", ,
     "kearneymw@missouri.edu", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0002-0730-4694"))
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: 
+Imports:
     glue,
     httr,
     jsonlite,

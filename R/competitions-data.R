@@ -5,8 +5,8 @@
 #'
 #' @param id string, Competition name. Required: TRUE.
 #' @export
-kaggle_competitions_data_list <- function(id) {
-  kaggle_api_get(glue::glue("competitions/data/list/{id}"))
+kgl_competitions_data_list <- function(id) {
+  kgl_api_get(glue::glue("competitions/data/list/{id}"))
 }
 
 #' CompetitionsDataDownloadFile
@@ -16,7 +16,7 @@ kaggle_competitions_data_list <- function(id) {
 #' @param id string, Competition name. Required: TRUE.
 #' @param fileName string, Competition name. Required: TRUE.
 #' @export
-kaggle_competitions_data_download <- function(id, fileName) {
-  kaggle_api_get(glue::glue(
+kgl_competitions_data_download <- function(id, fileName) {
+  kgl_api_get(glue::glue(
     "competitions/data/download/{id}/{fileName}"))
 }

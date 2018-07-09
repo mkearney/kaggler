@@ -5,8 +5,8 @@
 #'
 #' @param id string, Competition name. Required: TRUE.
 #' @export
-kaggle_competitions_leaderboard_download <- function(id) {
-  kaggle_api_get(glue::glue("competitions/{id}/leaderboard/download"))
+kgl_competitions_leaderboard_download <- function(id) {
+  kgl_api_get(glue::glue("competitions/{id}/leaderboard/download"))
 }
 
 #' CompetitionViewLeaderboard
@@ -15,6 +15,6 @@ kaggle_competitions_leaderboard_download <- function(id) {
 #'
 #' @param id string, Competition name. Required: TRUE.
 #' @export
-kaggle_competitions_leaderboard_view <- function(id) {
-  kaggle_api_get(glue::glue("competitions/{id}/leaderboard/view"))
+kgl_competitions_leaderboard_view <- function(id) {
+  kgl_api_get(glue::glue("competitions/{id}/leaderboard/view"))
 }

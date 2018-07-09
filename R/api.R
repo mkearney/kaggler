@@ -8,7 +8,7 @@
 .kaggle_base_url <- "https://www.kaggle.com/api/v1"
 
 ## URL builder
-kaggle_api_call <- function(path, ...) {
+kgl_api_call <- function(path, ...) {
   ## clean path and build url
   url <- paste0(.kaggle_base_url, "/", gsub("^/+|/+$", "", path))
 
@@ -38,9 +38,9 @@ kaggle_api_call <- function(path, ...) {
 }
 
 ## for GET requests
-kaggle_api_get <- function(path, ..., auth = kaggle_auth()) {
+kgl_api_get <- function(path, ..., auth = kgl_auth()) {
   ## build and make request
-  r <- httr::GET(kaggle_api_call(path, ...), auth)
+  r <- httr::GET(kgl_api_call(path, ...), auth)
 
   ## check status
   httr::warn_for_status(r)
@@ -51,7 +51,7 @@ kaggle_api_get <- function(path, ..., auth = kaggle_auth()) {
     if ("message" %in% names(m)) cat(m$message, fill = TRUE)
   } else {
     b <- r
-    r <- kaggle_as_tbl(r)
+    r <- kgl_as_tbl(r)
     if (nrow(r) == 0) {
       r <- as_json(b)
     }
@@ -62,9 +62,9 @@ kaggle_api_get <- function(path, ..., auth = kaggle_auth()) {
 }
 
 ## for POST requests
-kaggle_api_post <- function(path, ..., body = NULL) {
+kgl_api_post <- function(path, ..., body = NULL) {
   ## build and make request
-  r <- httr::POST(kaggle_api_call(path, ...), body = body)
+  r <- httr::POST(kgl_api_call(path, ...), body = body)
 
   ## check status
   httr::warn_for_status(r)

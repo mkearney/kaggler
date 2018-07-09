@@ -15,12 +15,12 @@
 #'   page, search, or (ownerSlug and datasetSlug). If ownerSlug and datasetSlug
 #'   are not NULL, this function looks for the matching dataset.
 #' @export
-kaggle_datasets_list <- function(page = 1, search = "",
-                                 ownerSlug = NULL, datasetSlug = NULL) {
+kgl_datasets_list <- function(page = 1, search = "",
+                              ownerSlug = NULL, datasetSlug = NULL) {
   if (!is.null(ownerSlug) && !is.null(datasetSlug)) {
-    kaggle_api_get(glue::glue("datasets/list/{ownerSlug}/{datasetSlug}"))
+    kgl_api_get(glue::glue("datasets/list/{ownerSlug}/{datasetSlug}"))
   } else {
-    kaggle_api_get("datasets/list", page = page, search = search)
+    kgl_api_get("datasets/list", page = page, search = search)
   }
 }
 
@@ -31,8 +31,8 @@ kaggle_datasets_list <- function(page = 1, search = "",
 #' @param ownerSlug string, Dataset owner. Required: TRUE.
 #' @param datasetSlug string, Dataset name. Required: TRUE.
 #' @export
-kaggle_datasets_view <- function(ownerSlug, datasetSlug) {
-  kaggle_api_get(glue::glue("datasets/view/{ownerSlug}/{datasetSlug}"))
+kgl_datasets_view <- function(ownerSlug, datasetSlug) {
+  kgl_api_get(glue::glue("datasets/view/{ownerSlug}/{datasetSlug}"))
 }
 
 #' DatasetsDownloadFile
@@ -44,9 +44,9 @@ kaggle_datasets_view <- function(ownerSlug, datasetSlug) {
 #' @param fileName string, File name. Required: TRUE.
 #' @param datasetVersionNumber string, Dataset version number. Required: FALSE.
 #' @export
-kaggle_datasets_download <- function(ownerSlug, datasetSlug, fileName,
-                                     datasetVersionNumber = NULL) {
-  kaggle_api_get(glue::glue(
+kgl_datasets_download <- function(ownerSlug, datasetSlug, fileName,
+                                  datasetVersionNumber = NULL) {
+  kgl_api_get(glue::glue(
     "datasets/download/{ownerSlug}/{datasetSlug}/{fileName}"),
     datasetVersionNumber = datasetVersionNumber)
 }
@@ -60,12 +60,12 @@ kaggle_datasets_download <- function(ownerSlug, datasetSlug, fileName,
 #' @param lastModifiedDateUtc integer, Last modified date of file in milliseconds
 #'   since epoch in UTC. Required: TRUE.
 #' @export
-kaggle_datasets_upload_file <- function(fileName, contentLength,
-                                        lastModifiedDateUtc) {
+kgl_datasets_upload_file <- function(fileName, contentLength,
+                                     lastModifiedDateUtc) {
   contentLength <- file.size(fileName)
   lastModifiedDateUtc <- format(file.info(fileName)$mtime,
     format = "%Y-%m-%d %H-%M-%S", tz = "UTC")
-  kaggle_api_post(glue::glue(
+  kgl_api_post(glue::glue(
     "datasets/upload/file/{contentLength}/{lastModifiedDateUtc}"),
     fileName = fileName)
 }
@@ -79,9 +79,9 @@ kaggle_datasets_upload_file <- function(fileName, contentLength,
 #' @param datasetNewVersionRequest Information for creating a new dataset version.
 #'   Required: TRUE.
 #' @export
-kaggle_datasets_create_version <- function(ownerSlug, datasetSlug,
-                                           datasetNewVersionRequest) {
-  kaggle_api_post(glue::glue(
+kgl_datasets_create_version <- function(ownerSlug, datasetSlug,
+                                        datasetNewVersionRequest) {
+  kgl_api_post(glue::glue(
     "datasets/create/version/{ownerSlug}/{datasetSlug}"),
     datasetNewVersionRequest = datasetNewVersionRequest)
 }
@@ -92,6 +92,6 @@ kaggle_datasets_create_version <- function(ownerSlug, datasetSlug,
 #'
 #' @param datasetNewRequest Information for creating a new dataset. Required: TRUE.
 #' @export
-kaggle_datasets_create_new <- function(datasetNewRequest) {
-  kaggle_api_post("datasets/create/new", datasetNewRequest = datasetNewRequest)
+kgl_datasets_create_new <- function(datasetNewRequest) {
+  kgl_api_post("datasets/create/new", datasetNewRequest = datasetNewRequest)
 }

@@ -7,13 +7,13 @@
 #' @param lastModifiedDateUtc integer, Last modified date of file in milliseconds
 #'   since epoch in UTC. Required: TRUE.
 #' @export
-kaggle_competitions_submissions_url <- function(fileName = NULL,
-                                                contentLength,
-                                                lastModifiedDateUtc) {
+kgl_competitions_submissions_url <- function(fileName = NULL,
+                                             contentLength,
+                                             lastModifiedDateUtc) {
   contentLength <- file.size(fileName)
   lastModifiedDateUtc <- format(file.info(fileName)$mtime,
     format = "%Y-%m-%d %H-%M-%S", tz = "UTC")
-  kaggle_api_post(glue::glue(
+  kgl_api_post(glue::glue(
     "competitions/submissions/url/{contentLength}/{lastModifiedDateUtc}"),
     fileName = fileName)
 }
@@ -29,13 +29,13 @@ kaggle_competitions_submissions_url <- function(fileName = NULL,
 #' @param lastModifiedDateUtc integer, Last modified date of file in milliseconds
 #'   since epoch in UTC. Required: TRUE.
 #' @export
-kaggle_competitions_submissions_upload <- function(file, guid,
-                                                   contentLength,
-                                                   lastModifiedDateUtc) {
+kgl_competitions_submissions_upload <- function(file, guid,
+                                                contentLength,
+                                                lastModifiedDateUtc) {
   contentLength <- file.size(file)
   lastModifiedDateUtc <- format(file.info(file)$mtime,
     format = "%Y-%m-%d %H-%M-%S", tz = "UTC")
-  kaggle_api_post(glue::glue(
+  kgl_api_post(glue::glue(
     "competitions/submissions/upload/{guid}/{contentLength}/",
     "{lastModifiedDateUtc}"),
     body = httr::upload_file(file))
@@ -51,10 +51,10 @@ kaggle_competitions_submissions_upload <- function(file, guid,
 #'   Required: TRUE.
 #' @param id string, Competition name. Required: TRUE.
 #' @export
-kaggle_competitions_submissions_submit <- function(blobFileTokens,
-                                                   submissionDescription,
-                                                   id) {
-  kaggle_api_post(glue::glue("competitions/submissions/submit/{id}"),
+kgl_competitions_submissions_submit <- function(blobFileTokens,
+                                                submissionDescription,
+                                                id) {
+  kgl_api_post(glue::glue("competitions/submissions/submit/{id}"),
     blobFileTokens = blobFileTokens,
     submissionDescription = submissionDescription)
 }
