@@ -17,8 +17,21 @@ kaggle_as_tbl <- function(x) {
   if (length(x) == 1 && is.list(x) && is.data.frame(x[[1]])) {
     x <- x[[1]]
   }
-  tibble::as_tibble(x[!is_recursive(x)], validate = FALSE)
+  x <- tibble::as_tibble(x[!is_recursive(x)], validate = FALSE)
+  parse_datetimes(x)
 }
+
+parse_datetimes <- function(x) {
+  x[grep("deadline|date", names(x), ignore.case = TRUE)] <- lapply(
+    x[grep("deadline|date", names(x), ignore.case = TRUE)], parse_datetime
+  )
+  x
+}
+
+parse_datetime <- function(x) {
+  as.POSIXct(strptime(x, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"), tz = "UTC")
+}
+
 
 as_parsed <- function(x) httr::content(x)
 
