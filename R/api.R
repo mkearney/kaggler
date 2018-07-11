@@ -51,14 +51,19 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
     if ("message" %in% names(m)) cat(m$message, fill = TRUE)
   } else {
     b <- r
-    r <- kgl_as_tbl(r)
-    if (nrow(r) == 0) {
+    r <- tryCatch(r, error = function(e) return(NULL))
+    if (is.null(r) %||% nrow(r) == 0) {
       r <- as_json(b)
     }
   }
 
   ## return data/response
   r
+}
+
+
+`%||%` <- function(a, b) {
+  if (length(a) > 0) a else b
 }
 
 ## for POST requests
