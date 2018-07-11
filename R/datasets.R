@@ -8,16 +8,16 @@
 #'   page, search, or (ownerSlug and datasetSlug)
 #' @param search string, Search terms. Defaults to . Retrieve datasets via
 #'   page, search, or (ownerSlug and datasetSlug)
-#' @param ownerSlug string, Dataset owner. Retrieve datasets via
-#'   page, search, or (ownerSlug and datasetSlug). If ownerSlug and datasetSlug
-#'   are not NULL, this function looks for the matching dataset.
-#' @param datasetSlug string, Dataset name. Retrieve datasets via
-#'   page, search, or (ownerSlug and datasetSlug). If ownerSlug and datasetSlug
-#'   are not NULL, this function looks for the matching dataset.
+#' @param owner_dataset Alternative to page/search.  The owner and dataset
+#'   slug as it appears in the URL, i.e.,
+#'   \code{"mathan/fifa-2018-match-statistics"}.
 #' @export
 kgl_datasets_list <- function(page = 1, search = "",
-                              ownerSlug = NULL, datasetSlug = NULL) {
-  if (!is.null(ownerSlug) && !is.null(datasetSlug)) {
+                              owner_dataset = NULL) {
+  if (!is.null(owner_dataset)) {
+    owner_dataset <- strsplit(owner_dataset, "/")[[1]]
+    ownerSlug <- owner_dataset[1]
+    datasetSlug <- owner_dataset[2]
     kgl_api_get(glue::glue("datasets/list/{ownerSlug}/{datasetSlug}"))
   } else {
     kgl_api_get("datasets/list", page = page, search = search)
@@ -28,10 +28,13 @@ kgl_datasets_list <- function(page = 1, search = "",
 #'
 #' Show details about a dataset
 #'
-#' @param ownerSlug string, Dataset owner. Required: TRUE.
-#' @param datasetSlug string, Dataset name. Required: TRUE.
+#' @param owner_dataset The owner and data set slug as it appears in the URL,
+#'   i.e., \code{"mathan/fifa-2018-match-statistics"}.
 #' @export
-kgl_datasets_view <- function(ownerSlug, datasetSlug) {
+kgl_datasets_view <- function(owner_dataset) {
+  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
+  ownerSlug <- owner_dataset[1]
+  datasetSlug <- owner_dataset[2]
   kgl_api_get(glue::glue("datasets/view/{ownerSlug}/{datasetSlug}"))
 }
 
@@ -39,13 +42,16 @@ kgl_datasets_view <- function(ownerSlug, datasetSlug) {
 #'
 #' Download dataset file
 #'
-#' @param ownerSlug string, Dataset owner. Required: TRUE.
-#' @param datasetSlug string, Dataset name. Required: TRUE.
+#' @param owner_dataset The owner and data set slug as it appears in the URL,
+#'   i.e., \code{"mathan/fifa-2018-match-statistics"}.
 #' @param fileName string, File name. Required: TRUE.
 #' @param datasetVersionNumber string, Dataset version number. Required: FALSE.
 #' @export
-kgl_datasets_download <- function(ownerSlug, datasetSlug, fileName,
+kgl_datasets_download <- function(owner_dataset, fileName,
                                   datasetVersionNumber = NULL) {
+  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
+  ownerSlug <- owner_dataset[1]
+  datasetSlug <- owner_dataset[2]
   kgl_api_get(glue::glue(
     "datasets/download/{ownerSlug}/{datasetSlug}/{fileName}"),
     datasetVersionNumber = datasetVersionNumber)
@@ -74,13 +80,16 @@ kgl_datasets_upload_file <- function(fileName, contentLength,
 #'
 #' Create a new dataset version
 #'
-#' @param ownerSlug string, Dataset owner. Required: TRUE.
-#' @param datasetSlug string, Dataset name. Required: TRUE.
+#' @param owner_dataset The owner and data set slug as it appears in the URL,
+#'   i.e., \code{"mathan/fifa-2018-match-statistics"}.
 #' @param datasetNewVersionRequest Information for creating a new dataset version.
 #'   Required: TRUE.
 #' @export
-kgl_datasets_create_version <- function(ownerSlug, datasetSlug,
+kgl_datasets_create_version <- function(owner_dataset,
                                         datasetNewVersionRequest) {
+  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
+  ownerSlug <- owner_dataset[1]
+  datasetSlug <- owner_dataset[2]
   kgl_api_post(glue::glue(
     "datasets/create/version/{ownerSlug}/{datasetSlug}"),
     datasetNewVersionRequest = datasetNewVersionRequest)
