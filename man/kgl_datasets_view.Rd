@@ -4,12 +4,11 @@
 \alias{kgl_datasets_view}
 \title{DatasetsView}
 \usage{
-kgl_datasets_view(ownerSlug, datasetSlug)
+kgl_datasets_view(owner_dataset)
 }
 \arguments{
-\item{ownerSlug}{string, Dataset owner. Required: TRUE.}
-
-\item{datasetSlug}{string, Dataset name. Required: TRUE.}
+\item{owner_dataset}{The owner and data set slug as it appears in the URL,
+i.e., \code{"mathan/fifa-2018-match-statistics"}.}
 }
 \description{
 Show details about a dataset

@@ -4,13 +4,11 @@
 \alias{kgl_datasets_download}
 \title{DatasetsDownloadFile}
 \usage{
-kgl_datasets_download(ownerSlug, datasetSlug, fileName,
-  datasetVersionNumber = NULL)
+kgl_datasets_download(owner_dataset, fileName, datasetVersionNumber = NULL)
 }
 \arguments{
-\item{ownerSlug}{string, Dataset owner. Required: TRUE.}
-
-\item{datasetSlug}{string, Dataset name. Required: TRUE.}
+\item{owner_dataset}{The owner and data set slug as it appears in the URL,
+i.e., \code{"mathan/fifa-2018-match-statistics"}.}
 
 \item{fileName}{string, File name. Required: TRUE.}
 

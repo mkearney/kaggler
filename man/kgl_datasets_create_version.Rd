@@ -4,12 +4,11 @@
 \alias{kgl_datasets_create_version}
 \title{DatasetsCreateVersion}
 \usage{
-kgl_datasets_create_version(ownerSlug, datasetSlug, datasetNewVersionRequest)
+kgl_datasets_create_version(owner_dataset, datasetNewVersionRequest)
 }
 \arguments{
-\item{ownerSlug}{string, Dataset owner. Required: TRUE.}
-
-\item{datasetSlug}{string, Dataset name. Required: TRUE.}
+\item{owner_dataset}{The owner and data set slug as it appears in the URL,
+i.e., \code{"mathan/fifa-2018-match-statistics"}.}
 
 \item{datasetNewVersionRequest}{Information for creating a new dataset version.
 Required: TRUE.}
