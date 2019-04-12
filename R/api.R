@@ -53,14 +53,32 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
     b <- r
     r <- tryCatch(r, error = function(e) return(NULL))
     if (is.null(r) %||% nrow(r) == 0) {
-      r <- as_json(b)
+      r <- interpret_response(r, type=type)
     }
   }
 
   ## return data/response
   r
 }
-
+                  
+interpret_response <- function(response, type=NULL) {
+    if (is.null(type)) {
+        http_T <- httr::http_type(response)
+    } else {
+        http_T <- type
+    }
+    if (grepl("json",http_T)) {
+        return(as_json(response))
+    }
+    if (grepl("ms\\-excel",http_T)) {
+        print("ciao")
+        return(httr::content(response, "text"))
+    }
+    if (grepl("csv",http_T))  {
+        return(read.csv(text=httr::content(response, "text")))
+    }
+    return(response)
+}
 
 `%||%` <- function(a, b) {
   if (length(a) > 0) a else b
