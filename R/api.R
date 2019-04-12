@@ -84,10 +84,10 @@ interpret_response <- function(response, type=NULL) {
         return(as_json(response))
     }
     if (grepl("ms\\-excel",http_T)) {
-        print("ciao")
         return(httr::content(response, "text"))
     }
     if (grepl("csv",http_T))  {
+        print("csv")
         return(read.csv(text=httr::content(response, "text")))
     }
     return(response)
