@@ -53,14 +53,27 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
     b <- r
     r <- tryCatch(r, error = function(e) return(NULL))
     if (is.null(r) %||% nrow(r) == 0) {
-      r <- interpret_response(r, type=type)
+      r <- interpret_response(r, type=guess_type(path))
     }
   }
 
   ## return data/response
   r
 }
-                  
+
+## Get last characters
+substrRight <- function(x, n){
+  substr(x, nchar(x)-n+1, nchar(x))
+}
+
+## Guess type from path                  
+guess_type <- function(path) {
+    if (substrRight(path, 4) == ".csv")  {
+        return("csv")
+    }
+  return(NULL)
+}
+
 interpret_response <- function(response, type=NULL) {
     if (is.null(type)) {
         http_T <- httr::http_type(response)
