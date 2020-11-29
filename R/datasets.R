@@ -63,7 +63,6 @@ kgl_datasets_download <- function(owner_dataset, fileName,
 #'
 #' @param owner_dataset The owner and data set slug as it appears in the URL,
 #'   i.e., \code{"mathan/fifa-2018-match-statistics"}.
-#' @param datasetVersionNumber string, Dataset version number. Required: FALSE.
 #' @export
 kgl_datasets_download_all <- function(owner_dataset) {
   owner_dataset <- strsplit(owner_dataset, "/")[[1]]
