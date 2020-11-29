@@ -57,6 +57,20 @@ kgl_datasets_download <- function(owner_dataset, fileName,
     datasetVersionNumber = datasetVersionNumber)
 }
 
+#' DatasetsDownloadFileAll
+#'
+#' Download dataset files
+#'
+#' @param owner_dataset The owner and data set slug as it appears in the URL,
+#'   i.e., \code{"mathan/fifa-2018-match-statistics"}.
+#' @export
+kgl_datasets_download_all <- function(owner_dataset) {
+  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
+  ownerSlug <- owner_dataset[1]
+  datasetSlug <- owner_dataset[2]
+  kgl_api_get(glue::glue("datasets/download/{ownerSlug}/{datasetSlug}"))
+}
+
 #' DatasetsUploadFile
 #'
 #' Get URL and token to start uploading a data file

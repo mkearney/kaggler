@@ -20,3 +20,13 @@ kgl_competitions_data_download <- function(id, fileName) {
   kgl_api_get(glue::glue(
     "competitions/data/download/{id}/{fileName}"))
 }
+
+#' CompetitionsDataDownloadFileFromUrl
+#'
+#' Download competition data file
+#'
+#' @param url string, Competition name. Required: TRUE.
+#' @export
+kgl_competitions_data_download_from_url <- function(url) {
+  kgl_api_get(url)
+}
