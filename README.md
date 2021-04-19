@@ -12,7 +12,7 @@ You can install the dev version of **{kaggler}** from
 
 ``` r
 ## install kaggler package from github
-devtools::install_packages("mkearney/kaggler")
+devtools::install_github("mkearney/kaggler")
 ```
 
 ## API authorization
